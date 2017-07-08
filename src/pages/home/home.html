@@ -1,19 +1,20 @@
 <ion-header>
-  <ion-navbar transparent>
+  <ion-toolbar transparent>
     <ion-buttons end>
       <button ion-button icon-only (click)="adicionarCoisas()">
     <ion-icon name="add"></ion-icon>
    </button>
     </ion-buttons>
-    <ion-title> Gerenciador de Tarefas
+    <ion-title align="center">Gerenciador de Tarefas
+      <ion-icon name="globe"></ion-icon>
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
   <div *ngIf="auth.autenticado">
-    <h2>Bem Vindo {{auth.nomeUsuario}}</h2>
+    <p align="center">Bem Vindo <b class="cor">{{auth.nomeUsuario}}</b></p>
 
     <ion-list>
       <ion-item-sliding *ngFor="let c of coisas | async">
@@ -26,6 +27,18 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
+  </div>
+
+  <div *ngIf="position">
+    <p align="center">Latitude: {{position.coords.latitude}}</p>
+    <p align="center">Longitude: {{position.coords.longitude}}</p>
+
+    <agm-map [latitude]="position.coords.latitude" [longitude]="position.coords.longitude" [zoom]="14">
+
+      <agm-marker [latitude]="position.coords.latitude" [longitude]="position.coords.longitude"> </agm-marker>
+
+    </agm-map>
+
   </div>
 
   <ion-card *ngIf="!auth.autenticado">

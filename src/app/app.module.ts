@@ -12,15 +12,18 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDi874XmsQOt5fsjaHAlUuLE87ii5RNNmg",
-    authDomain: "aula01-264cb.firebaseapp.com",
-    databaseURL: "https://aula01-264cb.firebaseio.com",
-    projectId: "aula01-264cb",
-    storageBucket: "aula01-264cb.appspot.com",
-    messagingSenderId: "557885983794"
-  };
+import { AgmCoreModule } from '@agm/core';
+import { Geolocation } from '@ionic-native/geolocation';
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDi874XmsQOt5fsjaHAlUuLE87ii5RNNmg",
+  authDomain: "aula01-264cb.firebaseapp.com",
+  databaseURL: "https://aula01-264cb.firebaseio.com",
+  projectId: "aula01-264cb",
+  storageBucket: "aula01-264cb.appspot.com",
+  messagingSenderId: "557885983794"
+};
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAhcWC7wKCDpDyPUyO4xQ_4C3vs_aA-UBU'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,8 +48,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthServiceProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AuthServiceProvider,
+    Geolocation
   ]
 })
-export class AppModule {}
+export class AppModule { }
