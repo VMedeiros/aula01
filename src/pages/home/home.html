@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar transparent>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="adicionarCoisas()">
+    <ion-icon name="add"></ion-icon>
+   </button>
+    </ion-buttons>
+    <ion-title> Gerenciador de Tarefas
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="auth.autenticado">
+    <h2>Bem Vindo {{auth.nomeUsuario}}</h2>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let c of coisas | async">
+        <ion-item>{{c.nome}}</ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="remover(c)">
+            <ion-icon name="trash" item-start></ion-icon>
+            Remover
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <ion-card *ngIf="!auth.autenticado">
+    <button ion-button outline (click)="login()">
+      <ion-icon name="home" item-start></ion-icon>
+        Entrar
+      </button>
+  </ion-card>
+</ion-content>
